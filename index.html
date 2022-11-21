@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Lot</title>
+  <script src="./script.js" defer></script>
+  <link rel="icon" type="image/x-icon" href="./parking-lot-logo-zip-file/png/logo-white.png">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo-div">
+      <img src="./parking-lot-logo-zip-file/png/logo-black.png" alt="parking-lot-logo">
+    </div>
+    <button class="manage-btn" type="button">Gerenciar</button>
+  </header>
+  <section class="search-sec">
+    <div>
+      <div class="search-input">
+        <label>Pesquisar placa: </label>
+        <input type="text" maxlength="7" pattern="/\w{4}\d{3}/g">
+      </div>
+      <button type="button">Buscar</button>
+      <div class="search-response"></div>
+    </div>
+    <p>Vagas disponíveis: <span class="spots-available">0</span></p>
+  </section>
+  <section class="parking-sec"></section>
+  <footer class="footer">
+    <p>Copyright©2022 - Parking Lot Company</p>
+  </footer>
+</body>
+
+</html>
