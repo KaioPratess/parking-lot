@@ -4,6 +4,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  user-select: none;
 }
 
 /* Header */
@@ -12,7 +13,6 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 25px;
-  border: 1px solid black;
 }
 
 .logo-div img {
@@ -32,12 +32,13 @@
   padding: 25px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   font-size: 1.125rem;
 }
 
 .search-sec > div {
   display: flex;
+  align-items: start;
 }
 
 .search-sec > div button {
@@ -52,19 +53,45 @@
   padding: 5px;
 }
 
+.search-response {
+  margin-left: 40px;
+  padding: 0 15px;
+  height: 90px;
+}
+
+.search-response ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  list-style: none;
+  gap: 10px 40px;
+}
+
+.search-response ul li {
+  display: flex;
+  gap: 5px;
+}
+
+.validation {
+  font-size: 0.875rem;
+  color: red;
+  padding: 10px;
+  position: absolute;
+  left: 150px;
+}
+
 /* Parking lot */
 .parking-sec {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
-  padding: 80px 60px;
+  padding: 40px 60px;
   gap: 0;
 }
 
 .parking-spot {
   height: 300px;
   width: 100%;
-  border: 11px solid gray;
+  border: 8px solid gray;
   text-align: center;
 }
 
@@ -83,16 +110,16 @@
 
 .parking-spot:nth-child(1),
 .parking-spot:nth-child(7) {
-  border-left: 22px solid grey;
+  border-left: 16px solid grey;
 }
 
 .parking-spot:nth-child(6),
 .parking-spot:nth-child(12) {
-  border-right: 22px solid grey;
+  border-right: 16px solid grey;
 }
 
 .spot-number {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 /* Footer */
