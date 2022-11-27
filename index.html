@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parking Lot</title>
   <script type="module" src="./script.js" defer></script>
-  <link rel="icon" type="image/x-icon" href="./parking-lot-logo-zip-file/png/logo-white.png">
+  <link rel="icon" type="image/x-icon" href="./img/png/logo-white.png">
   <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
   <header class="header">
     <div class="logo-div">
-      <img src="./parking-lot-logo-zip-file/png/logo-black.png" alt="parking-lot-logo">
+      <img src="./img/png/logo-black.png" alt="parking-lot-logo">
     </div>
     <button class="manage-btn" type="button">Gerenciar</button>
   </header>
@@ -29,9 +29,34 @@
 
       </div>
     </div>
-    <p>Vagas disponíveis: <span class="spots-available">0</span></p>
+    <p>Vagas disponíveis: <span class="available-spots">12</span></p>
   </section>
   <section class="parking-sec"></section>
+  <div class="modal-bg">
+    <div class="modal">
+      <div>
+        <p>Visão Geral</p>
+        <span class="close-modal">x</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Entrada</th>
+            <th>Saída</th>
+            <th>Valor</th>
+            <th>Horas</th>
+            <th>Vaga</th>
+          </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+        <tfoot class="tfoot">
+        </tfoot>
+      </table>
+    </div>
+  </div>
   <footer class="footer">
     <p>Copyright©2022 - Parking Lot Company</p>
   </footer>

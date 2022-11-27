@@ -7,11 +7,11 @@ export default (function createSpots() {
     const div = document.createElement('div');
     div.classList.add('parking-spot');
     div.setAttribute('id', i + 1);
-    const span = document.createElement('span');
-    span.classList.add('spot-number');
+    const p = document.createElement('p');
+    p.classList.add('spot-number');
     let spotNumber = `A${i + 1}`;
-    span.textContent = spotNumber;
-    div.append(span);
+    p.textContent = spotNumber;
+    div.append(p);
     parkingSec.append(div);
   }
 })();
