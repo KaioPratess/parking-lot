@@ -18,7 +18,7 @@ export default (function checkAvailableSpots() {
       const div = document.createElement('div');
       div.classList.add('car-img');
       const img = document.createElement('img');
-      img.setAttribute('src', '../img/png/car-top-view-icon.svg');
+      img.setAttribute('src', './img/png/car-top-view-icon.svg');
       div.append(img);
       parkingSpot.forEach((spot) => {
         if (rental.id == spot.getAttribute('id') && rental.endDate == null) {
