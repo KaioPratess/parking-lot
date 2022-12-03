@@ -2,13 +2,9 @@ export default (function showModal() {
   const modalBg = document.querySelector('.modal-bg');
   const manageBtn = document.querySelector('.manage-btn');
   const closeModal = document.querySelector('.close-modal');
-  const tr = document.querySelectorAll('tr');
+  const tbody = document.querySelector('.tbody');
 
   async function getData() {
-    const tbody = document.querySelector('.tbody');
-    if (tr) {
-      console.log(tr);
-    }
     const data = await fetch(
       'https://tcc-parking-iot.herokuapp.com/parking-rentals',
       {
@@ -26,7 +22,9 @@ export default (function showModal() {
         if (typeof rental[key] !== 'object') {
           td.textContent = rental[key];
         } else {
-          td.textContent = rental[key].plateNumber;
+          if (rental[key]) {
+            td.textContent = rental[key].plateNumber;
+          }
         }
         tr.append(td);
       });
@@ -40,8 +38,9 @@ export default (function showModal() {
   }
 
   manageBtn.addEventListener('click', () => {
-    getData();
+    tbody.textContent = '';
     modalBg.style.display = 'flex';
+    getData();
   });
 
   closeModal.addEventListener('click', () => {

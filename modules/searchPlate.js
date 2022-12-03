@@ -16,7 +16,7 @@ export default (function searchPlate() {
         p.textContent = '* O nome da placa deve conter 7 caracteres.';
         searchDiv.appendChild(p);
         parkingSpot.forEach((spot) => {
-          spot.style.background = 'transparent';
+          spot.style.background = 'black';
         });
       } else {
         // Fetch e display das informações
@@ -34,8 +34,9 @@ export default (function searchPlate() {
             // Pintar vaga
             parkingSpot.forEach((spot) => {
               const id = spot.getAttribute('id');
-              if (id == response[0].id) {
-                spot.style.background = 'yellow';
+              spot.style.background = 'black';
+              if (id == response[0].id && !response[0].endDate) {
+                spot.style.background = 'orange';
               }
             });
             // Preencher info da placa pesquisada
@@ -70,7 +71,7 @@ export default (function searchPlate() {
           } else {
             searchResponse.textContent = 'Placa não encontrada!';
             parkingSpot.forEach((spot) => {
-              spot.style.background = 'transparent';
+              spot.style.background = 'black';
             });
           }
         } catch (error) {

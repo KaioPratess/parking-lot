@@ -7,6 +7,10 @@
   user-select: none;
 }
 
+body {
+  background-color: black;
+}
+
 /* Header */
 .header {
   display: flex;
@@ -16,8 +20,8 @@
 }
 
 .logo-div img {
-  width: 180px;
-  height: 100px;
+  width: 250px;
+  height: 200px;
   object-fit: cover;
 }
 
@@ -34,6 +38,7 @@
   justify-content: space-between;
   align-items: start;
   font-size: 1.125rem;
+  color: white;
 }
 
 .search-sec > div {
@@ -51,12 +56,14 @@
 .search-input input {
   font-size: 1rem;
   padding: 5px;
+  outline: none;
 }
 
 .search-response {
   margin-left: 40px;
   padding: 0 15px;
   height: 90px;
+  color: white;
 }
 
 .search-response ul {
@@ -81,48 +88,39 @@
 
 /* Parking lot */
 .parking-sec {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  justify-items: center;
+  display: flex;
   padding: 40px 60px;
   gap: 0;
+  width: 100%;
+  justify-content: center;
 }
 
 .parking-spot {
-  height: 300px;
-  width: 100%;
-  border: 8px solid gray;
+  height: 320px;
+  width: 250px;
+  border: 6px solid yellow;
   text-align: center;
   display: flex;
-  flex-direction: column-reverse;
-  gap: 20px;
-}
-
-.parking-spot:nth-last-child(1n + 7) {
-  border-top: 0;
-  padding-bottom: 5px;
-}
-
-.parking-spot:nth-child(1n + 7) {
-  border-bottom: 0;
-  padding-top: 5px;
   flex-direction: column;
+  gap: 25px;
+  border-bottom: none;
+  border-top: 12px solid yellow
 }
 
-.parking-spot:nth-child(1),
-.parking-spot:nth-child(7) {
-  border-left: 16px solid grey;
+.parking-spot:nth-child(1) {
+  border-left: 12px solid yellow;
 }
 
-.parking-spot:nth-child(6),
-.parking-spot:nth-child(12) {
-  border-right: 16px solid grey;
+.parking-spot:nth-child(6) {
+  border-right: 12px solid yellow;
 }
 
 .spot-number {
   width: 100%;
   font-size: 1.5rem;
   text-align: center;
+  color: white;
+  margin-top: 10px;
 }
 
 .car-img {
@@ -133,6 +131,7 @@
   width: 140px;
   height: 219px;
   object-fit: contain;
+  transform: rotate(180deg)
 }
 
 /* Modal */
@@ -146,17 +145,18 @@
   justify-content: center;
   align-items: center;
   display: none;
+  color: white;
 }
 
 .modal {
   width: 900px;
   height: 550px;
-  border: 2px solid black;
+  border: 1px solid white;
   position: fixed;
   display: flex;
   flex-direction: column;
   gap: 50px;
-  background-color: beige;
+  background-color: black;
   padding: 20px;
   overflow: auto;
 }
@@ -181,7 +181,7 @@ table {
 }
 
 tr, td, th {
-  border: 2px solid black;
+  border: 2px solid white;
   text-align: center;
   padding: 5px;
 }
@@ -191,4 +191,5 @@ tr, td, th {
   text-align: center;
   padding: 25px;
   margin-top: 80px;
+  color: white;
 }
