@@ -1,3 +1,5 @@
+import car from '../img/png/car-top-view-icon.svg';
+
 export default (function checkAvailableSpots() {
   const availableSpots = document.querySelector('.available-spots');
   const parkingSpot = document.querySelectorAll('.parking-spot');
@@ -18,7 +20,7 @@ export default (function checkAvailableSpots() {
       const div = document.createElement('div');
       div.classList.add('car-img');
       const img = document.createElement('img');
-      img.setAttribute('src', '../img/png/car-top-view-icon.svg');
+      img.setAttribute('src', car);
       div.append(img);
       parkingSpot.forEach((spot) => {
         if (rental.id == spot.getAttribute('id') && rental.endDate == null) {
