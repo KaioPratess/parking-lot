@@ -1,10 +1,20 @@
 export default (function checkAvailableSpots() {
   const availableSpots = document.querySelector('.available-spots');
   const parkingSpot = document.querySelectorAll('.parking-spot');
-  let spots = 6;
 
   async function checkAvailability() {
-    spots = 6;
+    const spots = await fetch(
+      'https://tcc-parking-iot.herokuapp.com/parking-spots/available-parkingspot',
+      {
+        method: 'GET',
+        mode: 'cors',
+      },
+    );
+
+    const responseSpots = await spots.json();
+
+    availableSpots.textContent = responseSpots;
+
     const data = await fetch(
       'https://tcc-parking-iot.herokuapp.com/parking-rentals',
       {
@@ -12,9 +22,9 @@ export default (function checkAvailableSpots() {
         mode: 'cors',
       },
     );
-    const response = await data.json();
+    const responseRental = await data.json();
 
-    response.forEach((rental) => {
+    responseRental.forEach((rental) => {
       const div = document.createElement('div');
       div.classList.add('car-img');
       const img = document.createElement('img');
@@ -22,13 +32,11 @@ export default (function checkAvailableSpots() {
       div.append(img);
       parkingSpot.forEach((spot) => {
         if (rental.id == spot.getAttribute('id') && rental.endDate == null) {
-          spots -= 1;
           if (spot.childNodes[1]) spot.childNodes[1].remove();
           spot.append(div);
         }
       });
     });
-    availableSpots.textContent = spots;
   }
 
   checkAvailability();
