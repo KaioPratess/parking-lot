@@ -17,6 +17,7 @@ export default (function showModal() {
     );
 
     const response = await data.json();
+    console.log(response);
     response.forEach((rental) => {
       const tr = document.createElement('tr');
       const keys = Object.keys(rental);
@@ -29,14 +30,6 @@ export default (function showModal() {
             startDate = new Date(rental[key]);
           } else if (key == 'endDate' && rental[key] !== null) {
             endDate = new Date(rental[key]);
-          } else if (key == 'hour' && rental.endDate !== null) {
-            const startHour = startDate.getUTCHours();
-            const endHour = endDate.getUTCHours();
-            hours = endHour - startHour;
-            td.textContent = `${hours}h`;
-          } else if (key == 'value' && rental.endDate !== null) {
-            const hourValue = 10;
-            td.textContent = `R$ ${hours * hourValue}`;
           }
         } else {
           if (rental[key]) {
@@ -46,9 +39,21 @@ export default (function showModal() {
         tr.append(td);
       });
 
-      const td = document.createElement('td');
-      td.textContent = `A${rental.id}`;
-      tr.append(td);
+      const hour = document.createElement('td');
+      const startHour = startDate.getUTCHours();
+      const endHour = endDate.getUTCHours();
+      hours = endHour - startHour;
+      hour.textContent = `${hours}h`;
+      tr.append(hour);
+
+      const value = document.createElement('td');
+      const hourValue = 10;
+      value.textContent = `R$ ${hours * hourValue}`;
+      tr.append(value);
+
+      const spot = document.createElement('td');
+      spot.textContent = `A${rental.id}`;
+      tr.append(spot);
 
       tbody.append(tr);
     });
