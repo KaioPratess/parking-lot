@@ -134,6 +134,25 @@ body {
   transform: rotate(180deg)
 }
 
+.path {
+  display: flex;
+  width: 100%;
+  gap: 400px;
+  position: absolute;
+  bottom: -200px;
+  justify-content: center;
+}
+
+.entry, .exit {
+  width: 250px;
+  height: 50px;
+  background-color: yellow;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Modal */
 .modal-bg {
   position: fixed;
@@ -190,6 +209,6 @@ tr, td, th {
 .footer {
   text-align: center;
   padding: 25px;
-  margin-top: 80px;
+  margin-top: 200px;
   color: white;
 }

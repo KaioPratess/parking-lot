@@ -16,22 +16,21 @@ export default (function checkAvailableSpots() {
     availableSpots.textContent = responseSpots;
 
     const data = await fetch(
-      'https://tcc-parking-iot.herokuapp.com/parking-rentals',
+      'https://tcc-parking-iot.herokuapp.com/parking-spots',
       {
         method: 'GET',
         mode: 'cors',
       },
     );
     const responseRental = await data.json();
-
     responseRental.forEach((rental) => {
-      const div = document.createElement('div');
-      div.classList.add('car-img');
-      const img = document.createElement('img');
-      img.setAttribute('src', './img/png/car-top-view-icon.svg');
-      div.append(img);
       parkingSpot.forEach((spot) => {
-        if (rental.id == spot.getAttribute('id') && rental.endDate == null) {
+        if (rental.id == spot.getAttribute('id') && !rental.available) {
+          const div = document.createElement('div');
+          div.classList.add('car-img');
+          const img = document.createElement('img');
+          img.setAttribute('src', './img/png/car-top-view-icon.svg');
+          div.append(img);
           if (spot.childNodes[1]) spot.childNodes[1].remove();
           spot.append(div);
         }

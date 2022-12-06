@@ -3,7 +3,7 @@ export default (function createSpots() {
   const parkingSec = document.querySelector('.parking-sec');
 
   // Criar as vagas do estacionamento
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 3; i++) {
     const div = document.createElement('div');
     div.classList.add('parking-spot');
     div.setAttribute('id', i + 1);
