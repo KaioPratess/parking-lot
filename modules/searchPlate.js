@@ -8,6 +8,9 @@ export default (function searchPlate() {
   const p = document.createElement('p');
 
   async function getCarByPlate(e) {
+    parkingSpot.forEach((spot) => {
+      spot.style.background = 'black';
+    });
     if (e.key == 'Enter' || e.type == 'click') {
       if (searchInput.value.split('').length < 7) {
         // Validação do campo de input
@@ -36,21 +39,20 @@ export default (function searchPlate() {
           let hours;
           const hourValue = 10;
 
-          startDate = new Date(response[0].startDate);
-          const startHour = startDate.getUTCHours();
-          let endHour;
-          if (response[0].endDate) {
-            endDate = new Date(response[0].endDate);
-            endHour = endDate.getUTCHours();
-          }
-
-          if (endHour) {
-            hours = endHour - startHour;
-          } else {
-            hours = 0;
-          }
-
           if (response.length) {
+            startDate = new Date(response[0].startDate);
+            const startHour = startDate.getUTCHours();
+            let endHour;
+            if (response[0].endDate) {
+              endDate = new Date(response[0].endDate);
+              endHour = endDate.getUTCHours();
+            }
+
+            if (endHour) {
+              hours = endHour - startHour;
+            } else {
+              hours = 0;
+            }
             // Preencher info da placa pesquisada
             searchResponse.innerHTML = `
         <ul>
@@ -92,8 +94,7 @@ export default (function searchPlate() {
             responseData.forEach((data) => {
               if (
                 data.plate &&
-                !response[0].endDate &&
-                response[0].id == data.plate.id &&
+                response[0].plate.plateNumber == data.plate.plateNumber &&
                 !data.available
               ) {
                 parkingSpot.forEach((spot) => {
@@ -119,5 +120,8 @@ export default (function searchPlate() {
   }
 
   searchBtn.addEventListener('click', getCarByPlate);
-  searchInput.addEventListener('keydown', getCarByPlate);
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key == 'Enter') getCarByPlate;
+    else return;
+  });
 })();
