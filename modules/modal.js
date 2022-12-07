@@ -6,6 +6,7 @@ export default (function showModal() {
   let startDate;
   let endDate;
   let hours;
+  const hourValue = 10;
 
   async function getData() {
     const data = await fetch(
@@ -17,7 +18,7 @@ export default (function showModal() {
     );
 
     const response = await data.json();
-    console.log(response);
+
     response.forEach((rental) => {
       const tr = document.createElement('tr');
       const keys = Object.keys(rental);
@@ -40,14 +41,18 @@ export default (function showModal() {
       });
 
       const hour = document.createElement('td');
-      const startHour = startDate.getUTCHours();
-      const endHour = endDate.getUTCHours();
-      hours = endHour - startHour;
-      hour.textContent = `${hours}h`;
+      if (rental.endDate) {
+        const startHour = startDate.getUTCHours();
+        const endHour = endDate.getUTCHours();
+        hours = endHour - startHour;
+        hour.textContent = `${hours}h`;
+      } else {
+        hour.textContent = 0;
+      }
+
       tr.append(hour);
 
       const value = document.createElement('td');
-      const hourValue = 10;
       value.textContent = `R$ ${hours * hourValue}`;
       tr.append(value);
 

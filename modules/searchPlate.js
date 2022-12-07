@@ -30,15 +30,27 @@ export default (function searchPlate() {
             },
           );
           const response = await data.json();
+
+          let startDate;
+          let endDate;
+          let hours;
+          const hourValue = 10;
+
+          startDate = new Date(response[0].startDate);
+          const startHour = startDate.getUTCHours();
+          let endHour;
+          if (response[0].endDate) {
+            endDate = new Date(response[0].endDate);
+            endHour = endDate.getUTCHours();
+          }
+
+          if (endHour) {
+            hours = endHour - startHour;
+          } else {
+            hours = 0;
+          }
+
           if (response.length) {
-            // Pintar vaga
-            parkingSpot.forEach((spot) => {
-              const id = spot.getAttribute('id');
-              spot.style.background = 'black';
-              if (id == response[0].id && !response[0].endDate) {
-                spot.style.background = 'orange';
-              }
-            });
             // Preencher info da placa pesquisada
             searchResponse.innerHTML = `
         <ul>
@@ -60,14 +72,39 @@ export default (function searchPlate() {
         </li>
         <li class="Horas">
           <p>Horas: </p>
-          <span>${response[0].hour}</span>
+          <span>${hours}h</span>
         </li>
         <li class="valor">
           <p>Valor: </p>
-          <span>${response[0].value}</span>
+          <span>R$ ${hourValue * hours}</span>
         </li>
         </ul>
         `;
+
+            const fetchData = await fetch(
+              'https://tcc-parking-iot.herokuapp.com/parking-spots',
+              {
+                method: 'GET',
+                mode: 'cors',
+              },
+            );
+            const responseData = await fetchData.json();
+
+            responseData.forEach((data) => {
+              if (
+                !response[0].endDate &&
+                response[0].id == data.id &&
+                !data.available
+              ) {
+                parkingSpot.forEach((spot) => {
+                  const id = spot.getAttribute('id');
+                  spot.style.background = 'black';
+                  if (id == data.id) {
+                    spot.style.background = 'orange';
+                  }
+                });
+              }
+            });
           } else {
             searchResponse.textContent = 'Placa não encontrada!';
             parkingSpot.forEach((spot) => {
