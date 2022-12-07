@@ -27,8 +27,8 @@ export default (function checkAvailableSpots() {
       parkingSpot.forEach((spot) => {
         if (
           rental.plate &&
-          rental.plate.id == spot.getAttribute('id') &&
-          !rental.available
+          rental.name == `A${spot.getAttribute('id')}` &&
+          !rental.availableSpots
         ) {
           const div = document.createElement('div');
           div.classList.add('car-img');

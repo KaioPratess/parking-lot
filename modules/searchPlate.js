@@ -92,15 +92,17 @@ export default (function searchPlate() {
             );
             const responseData = await fetchData.json();
             responseData.forEach((data) => {
+              console.log(data);
+              console.log(response[0].plate.plateNumber);
               if (
                 data.plate &&
                 response[0].plate.plateNumber == data.plate.plateNumber &&
                 !data.available
               ) {
                 parkingSpot.forEach((spot) => {
-                  const id = spot.getAttribute('id');
+                  const id = `A${spot.getAttribute('id')}`;
                   spot.style.background = 'black';
-                  if (id == data.plate.id) {
+                  if (id == data.name) {
                     spot.style.background = 'orange';
                   }
                 });
@@ -121,7 +123,10 @@ export default (function searchPlate() {
 
   searchBtn.addEventListener('click', getCarByPlate);
   searchInput.addEventListener('keydown', (e) => {
-    if (e.key == 'Enter') getCarByPlate;
-    else return;
+    if (e.key == 'Enter') {
+      getCarByPlate(e);
+    } else {
+      return;
+    }
   });
 })();

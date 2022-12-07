@@ -55,10 +55,6 @@ export default (function showModal() {
       tr.append(hour);
       tr.append(value);
 
-      const spot = document.createElement('td');
-      spot.textContent = `A${rental.id}`;
-      tr.append(spot);
-
       tbody.append(tr);
     });
   }
