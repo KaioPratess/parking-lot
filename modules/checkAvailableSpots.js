@@ -23,22 +23,34 @@ export default (function checkAvailableSpots() {
       },
     );
     const responseRental = await data.json();
+
     responseRental.forEach((rental) => {
-      parkingSpot.forEach((spot) => {
-        if (
-          rental.plate &&
-          rental.name == `A${spot.getAttribute('id')}` &&
-          !rental.availableSpots
-        ) {
-          const div = document.createElement('div');
-          div.classList.add('car-img');
-          const img = document.createElement('img');
-          img.setAttribute('src', './img/png/car-top-view-icon.svg');
-          div.append(img);
-          if (spot.childNodes[1]) spot.childNodes[1].remove();
-          spot.append(div);
-        }
-      });
+      if (!rental.available) {
+        parkingSpot.forEach((spot) => {
+          if (
+            rental.plate &&
+            rental.name == `A${spot.getAttribute('id')}` &&
+            !rental.available
+          ) {
+            const div = document.createElement('div');
+            div.classList.add('car-img');
+            const img = document.createElement('img');
+            img.setAttribute('src', './img/png/car-top-view-icon.svg');
+            div.append(img);
+            if (spot.childNodes[1]) spot.childNodes[1].remove();
+            spot.append(div);
+          }
+        });
+      } else {
+        parkingSpot.forEach((spot) => {
+          if (
+            rental.name == `A${spot.getAttribute('id')}` &&
+            spot.childNodes[1]
+          ) {
+            spot.childNodes[1].remove();
+          }
+        });
+      }
     });
   }
 
