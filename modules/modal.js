@@ -18,6 +18,8 @@ export default (function showModal() {
     );
 
     const response = await data.json();
+
+    response.sort((a, b) => a.id - b.id);
     response.forEach((rental) => {
       const tr = document.createElement('tr');
       const keys = Object.keys(rental);
