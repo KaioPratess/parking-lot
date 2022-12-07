@@ -26,7 +26,7 @@ export default (function searchPlate() {
         try {
           p.remove();
           const data = await fetch(
-            `https://tcc-parking-iot.herokuapp.com/parking-rentals/findByPlateNumber?plateNumber=${searchInput.value}`,
+            `https://tcc-parking-iot.herokuapp.com/parking-spots/find-by-plate?plateNumber=${searchInput.value}`,
             {
               method: 'GET',
               mode: 'cors',
@@ -34,51 +34,17 @@ export default (function searchPlate() {
           );
           const response = await data.json();
 
-          let startDate;
-          let endDate;
-          let hours;
-          const hourValue = 10;
-
-          if (response.length) {
-            startDate = new Date(response[0].startDate);
-            const startHour = startDate.getUTCHours();
-            let endHour;
-            if (response[0].endDate) {
-              endDate = new Date(response[0].endDate);
-              endHour = endDate.getUTCHours();
-            }
-
-            if (endHour) {
-              hours = endHour - startHour;
-            } else {
-              hours = 0;
-            }
+          if (response) {
             // Preencher info da placa pesquisada
             searchResponse.innerHTML = `
         <ul>
         <li class="id">
           <p>ID: </p>
-          <span>${response[0].plate.id}</span>
+          <span>${response.plate.id}</span>
         </li>
         <li class="vaga">
           <p>Vaga: </p>
-          <span>A${response[0].id}</span>
-        </li>
-        <li class="entrada">
-          <p>Entrada: </p>
-          <span>${response[0].startDate}</span>
-        </li>
-        <li class="saida">
-          <p>Saída: </p>
-          <span>${response[0].endDate}</span>
-        </li>
-        <li class="Horas">
-          <p>Horas: </p>
-          <span>${hours}h</span>
-        </li>
-        <li class="valor">
-          <p>Valor: </p>
-          <span>R$ ${hourValue * hours}</span>
+          <span>${response.name}</span>
         </li>
         </ul>
         `;
@@ -91,12 +57,11 @@ export default (function searchPlate() {
               },
             );
             const responseData = await fetchData.json();
+
             responseData.forEach((data) => {
-              console.log(data);
-              console.log(response[0].plate.plateNumber);
               if (
                 data.plate &&
-                response[0].plate.plateNumber == data.plate.plateNumber &&
+                response.plate.plateNumber == data.plate.plateNumber &&
                 !data.available
               ) {
                 parkingSpot.forEach((spot) => {
@@ -115,7 +80,8 @@ export default (function searchPlate() {
             });
           }
         } catch (error) {
-          alert(error);
+          searchResponse.textContent = 'Placa não encontrada!';
+          console.log('O fetch não retornou nada');
         }
       }
     }
