@@ -89,17 +89,17 @@ export default (function searchPlate() {
               },
             );
             const responseData = await fetchData.json();
-
             responseData.forEach((data) => {
               if (
+                data.plate &&
                 !response[0].endDate &&
-                response[0].id == data.id &&
+                response[0].id == data.plate.id &&
                 !data.available
               ) {
                 parkingSpot.forEach((spot) => {
                   const id = spot.getAttribute('id');
                   spot.style.background = 'black';
-                  if (id == data.id) {
+                  if (id == data.plate.id) {
                     spot.style.background = 'orange';
                   }
                 });

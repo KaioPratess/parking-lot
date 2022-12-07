@@ -18,7 +18,6 @@ export default (function showModal() {
     );
 
     const response = await data.json();
-
     response.forEach((rental) => {
       const tr = document.createElement('tr');
       const keys = Object.keys(rental);
@@ -41,19 +40,19 @@ export default (function showModal() {
       });
 
       const hour = document.createElement('td');
+      const value = document.createElement('td');
       if (rental.endDate) {
         const startHour = startDate.getUTCHours();
         const endHour = endDate.getUTCHours();
         hours = endHour - startHour;
         hour.textContent = `${hours}h`;
+        value.textContent = `R$ ${hours * hourValue}`;
       } else {
-        hour.textContent = 0;
+        hour.textContent = `0h`;
+        value.textContent = `R$ 0`;
       }
 
       tr.append(hour);
-
-      const value = document.createElement('td');
-      value.textContent = `R$ ${hours * hourValue}`;
       tr.append(value);
 
       const spot = document.createElement('td');
